@@ -1,8 +1,9 @@
 ﻿using System;
+using RescueTimeWebApiClient.Requests;
 
 namespace RescueTimeWebApiClient.Endpoints.AnalyticApi
 {
-    public class GetEventRequest
+    public class GetEventRequest : GetRequest
     {
         public readonly string EndPointUri = EndpointModel.Uri.ToString(); // TODO: Reconcile EndPointUri and Key with new WebClient class. 
         public readonly string Key = EndpointModel.ApiKey;

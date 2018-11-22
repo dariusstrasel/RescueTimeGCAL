@@ -17,7 +17,7 @@ namespace RescueTimeWebApiClient
 
         public async Task MakeRequest(IApiRequest apiRequest)
         {
-            var response = await SendAsync(apiRequest);
+            await SendAsync(apiRequest);
         }
 
         private async Task<HttpResponseMessage> SendAsync(IApiRequest apiRequest)

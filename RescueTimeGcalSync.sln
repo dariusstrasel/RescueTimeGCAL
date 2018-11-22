@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiClient", "RescueTimeApiClient\RescueTimeApiClient.csproj", "{9E970D01-168A-47A3-9B5F-617F97708B6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RescueTimeApiClient.Tests", "RescueTimeApiClient.Tests\RescueTimeApiClient.Tests.csproj", "{267DA788-4BAE-4ED0-9D99-D139AD3BF356}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9E970D01-168A-47A3-9B5F-617F97708B6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E970D01-168A-47A3-9B5F-617F97708B6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E970D01-168A-47A3-9B5F-617F97708B6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267DA788-4BAE-4ED0-9D99-D139AD3BF356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267DA788-4BAE-4ED0-9D99-D139AD3BF356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267DA788-4BAE-4ED0-9D99-D139AD3BF356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267DA788-4BAE-4ED0-9D99-D139AD3BF356}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
