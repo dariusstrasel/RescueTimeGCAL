@@ -15,27 +15,32 @@ namespace RescueTimeWebApiClient
             this.httpClient = httpClient;
         }
 
-        public async Task MakeRequest(IApiRequest apiRequest)
+        public async Task<T> MakeRequest<T>(IApiRequest<T> apiRequest)
         {
-            await SendAsync(apiRequest);
+            var response = await SendAsync(apiRequest);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBodyAsString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(responseBodyAsString);
+            }
+
+            var errorContent = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Request to {apiRequest?.EndPointUri} returned failure status code of {response.StatusCode} with error content: \n\n{errorContent}");
         }
 
         private async Task<HttpResponseMessage> SendAsync(IApiRequest apiRequest)
         {
-            var request = new HttpRequestMessage
-            {
-                Method = apiRequest.Method,
-                RequestUri = new Uri(apiRequest.EndpointUri)
-            };
-
-            if (apiRequest.HasPayload)
-            {
-                throw new NotImplementedException();
-            }
-
-            request.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Payload));
+            var httpRequestMessageBuilder = new HttpRequestMessageBuilder();
             
-            var response = await httpClient.SendAsync(request);
+            httpRequestMessageBuilder.WithMethod(apiRequest.Method);
+            httpRequestMessageBuilder.WithRequestUri(new Uri(apiRequest.EndPointUri));
+            if (apiRequest.HasPayload)
+                httpRequestMessageBuilder.WithPayload(apiRequest.Payload);
+            if (apiRequest.HasQueryParameters)
+                httpRequestMessageBuilder.WithQueryStringParameters(apiRequest.Payload);
+
+            var response = await httpClient.SendAsync(httpRequestMessageBuilder.Build());
 
             return response;
         }
